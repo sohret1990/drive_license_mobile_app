@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'bindings/question_binding.dart';
+import 'screens/main_screen.dart';
+import 'screens/question_screen.dart';
+import 'themes/material_theme.dart';
+
+void main() {
+  runApp(const DriveLicenseApp());
+}
+
+class DriveLicenseApp extends StatelessWidget {
+  const DriveLicenseApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme().materialTheme,
+      getPages: [
+        GetPage(
+            name: "/question",
+            page: () => QuestionScreen(),
+            binding: QuestionBinding()),
+      ],
+      home: MainScreen(),
+    );
+  }
+}
