@@ -1,3 +1,4 @@
+import 'package:drive_license_app/helpers/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,9 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: MyAppBar(iconData: Icons.drive_eta_rounded, isCenter: true, caption:"Sürücülük imtahanı", ),
+
+      /*AppBar(
         centerTitle: true,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -17,7 +20,7 @@ class MainScreen extends StatelessWidget {
             Text("Sürücülük imtahanı"),
           ],
         ),
-      ),
+      ),*/
       body: Container(
         decoration: BoxDecoration(
           gradient: const SweepGradient(
@@ -38,7 +41,9 @@ class MainScreen extends StatelessWidget {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.offNamed("/exam");
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

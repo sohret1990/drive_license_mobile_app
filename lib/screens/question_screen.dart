@@ -16,7 +16,11 @@ class QuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(caption: "Suallar"),
+      appBar: MyAppBar(
+        iconData: Icons.add_circle,
+        isCenter: true,
+        caption: "Suallar",
+      ),
       body: FutureBuilder(
         future: getQuestionList(),
         initialData: [],
@@ -30,7 +34,10 @@ class QuestionScreen extends StatelessWidget {
                     child: ListTile(
                       title: Text(
                         '${index + 1}. ${question.nameAz}',
-                        style: TextStyle(color: Colors.teal, fontSize: 13, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   );
@@ -41,7 +48,9 @@ class QuestionScreen extends StatelessWidget {
             );
           else
             return Center(
-              child: CircularProgressIndicator( color: Colors.teal, ),
+              child: CircularProgressIndicator(
+                color: Colors.teal,
+              ),
             );
         },
       ),

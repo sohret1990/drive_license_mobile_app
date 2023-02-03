@@ -1,3 +1,5 @@
+import 'package:drive_license_app/bindings/exam_binding.dart';
+import 'package:drive_license_app/screens/exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +25,10 @@ class DriveLicenseApp extends StatelessWidget {
             name: "/question",
             page: () => QuestionScreen(),
             binding: QuestionBinding()),
+        GetPage(
+            name: "/exam",
+            page: () => ExamScreen(),
+            binding: ExamBinding()),
       ],
       home: MainScreen(),
     );

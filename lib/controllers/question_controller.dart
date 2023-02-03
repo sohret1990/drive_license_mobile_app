@@ -8,6 +8,7 @@ class QuestionController extends BaseController {
     var data = await RequestHelper().getData("/questions");
     var list = data.data as List<dynamic>;
     var dataList = list.map((e) => QuestionModel.fromJson(e));
+
     return dataList.toList();
   }
 }
