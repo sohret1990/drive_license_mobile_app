@@ -2,8 +2,8 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamQuestionNumberScreen extends StatefulWidget {
-  const ExamQuestionNumberScreen({Key? key, required this.questionIndex, required this.questionList }) : super(key: key);
-  final int questionIndex ;
+  ExamQuestionNumberScreen({Key? key, required this.questionIndex, required this.questionList }) : super(key: key);
+  int questionIndex ;
   final List<QuestionModel> questionList;
 
   @override
@@ -11,6 +11,13 @@ class ExamQuestionNumberScreen extends StatefulWidget {
 }
 
 class _ExamQuestionNumberScreenState extends State<ExamQuestionNumberScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -28,7 +35,9 @@ class _ExamQuestionNumberScreenState extends State<ExamQuestionNumberScreen> {
                 children: [
                   GestureDetector(
                     onTapDown: (details) {
-
+                      setState(() {
+                        this.widget.questionIndex = index + 1;
+                      });
                     },
                     child: Container(
                       child: Padding(
