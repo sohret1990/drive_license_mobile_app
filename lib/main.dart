@@ -1,5 +1,5 @@
 import 'package:drive_license_app/bindings/exam_binding.dart';
-import 'package:drive_license_app/screens/exam_screen.dart';
+import 'package:drive_license_app/screens/exam/exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

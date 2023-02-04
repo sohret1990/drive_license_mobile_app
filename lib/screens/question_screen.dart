@@ -33,7 +33,7 @@ class QuestionScreen extends StatelessWidget {
                   return Card(
                     child: ListTile(
                       title: Text(
-                        '${index + 1}. ${question.nameAz}',
+                        '${index + 1}. ',
                         style: TextStyle(
                             color: Colors.teal,
                             fontSize: 13,
