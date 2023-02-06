@@ -17,10 +17,21 @@ class _ExamScreenState extends State<ExamScreen> {
   QuestionModel? questionModel;
   List<QuestionModel> questionList = [];
 
+  Future<List<QuestionModel>> getList() async {
+    var data = await _examController.getExamQuestions();
+    return data;
+  }
+
+  changeQuestion(int value){
+    print(value);
+    setState(() {
+      this.questionIndex = value;
+    });
+  }
+
   int questionIndex = 0;
 
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(30),
@@ -31,18 +42,25 @@ class _ExamScreenState extends State<ExamScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: _examController.getExamQuestions(),
-        initialData: [],
+        future: getList(),
+        initialData: this.questionList,
         builder: (context, snapshot) {
           Widget screen;
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data is List<QuestionModel>) {
+            print(snapshot.data);
             this.questionList = snapshot!.data as List<QuestionModel>;
-            questionModel = snapshot.data![this.questionIndex];
-            screen = ExamQuestionScreen(
-              questionIndex: this.questionIndex,
-              questionModel: this.questionModel!,
-              questionList: this.questionList,
-            );
+
+            if (this.questionList.isEmpty) {
+              screen = Center(child: CircularProgressIndicator());
+            } else {
+              questionModel = snapshot.data![this.questionIndex];
+              screen = ExamQuestionScreen(
+                questionIndex: this.questionIndex,
+                questionModel: this.questionModel!,
+                questionList: this.questionList,
+                changeQuestion: this.changeQuestion,
+              );
+            }
           } else if (snapshot.hasError) {
             screen = Center(child: Text('Xəta baş verdi!'));
           } else {

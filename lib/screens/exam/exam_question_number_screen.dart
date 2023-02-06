@@ -2,9 +2,11 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamQuestionNumberScreen extends StatefulWidget {
-  ExamQuestionNumberScreen({Key? key, required this.questionIndex, required this.questionList }) : super(key: key);
+  ExamQuestionNumberScreen({Key? key, required this.questionIndex, required this.questionList, required this.changeQuestion }) : super(key: key);
   int questionIndex ;
   final List<QuestionModel> questionList;
+
+  Function changeQuestion;
 
   @override
   State<ExamQuestionNumberScreen> createState() => _ExamQuestionNumberScreenState();
@@ -12,11 +14,11 @@ class ExamQuestionNumberScreen extends StatefulWidget {
 
 class _ExamQuestionNumberScreenState extends State<ExamQuestionNumberScreen> {
 
-  @override
+ /* @override
   void initState() {
     // TODO: implement initState
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +37,7 @@ class _ExamQuestionNumberScreenState extends State<ExamQuestionNumberScreen> {
                 children: [
                   GestureDetector(
                     onTapDown: (details) {
-                      setState(() {
-                        this.widget.questionIndex = index + 1;
-                      });
+                      this.widget.changeQuestion(index);
                     },
                     child: Container(
                       child: Padding(
@@ -49,7 +49,7 @@ class _ExamQuestionNumberScreenState extends State<ExamQuestionNumberScreen> {
                       ),
                       width: 30,
                       height: 10,
-                      decoration: this.widget.questionIndex != index + 1
+                      decoration: this.widget.questionIndex != index
                           ? BoxDecoration(
                         gradient: RadialGradient(colors: [
                           Colors.tealAccent,

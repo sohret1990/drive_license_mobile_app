@@ -10,18 +10,30 @@ import 'package:get/get.dart';
 
 
 class ExamQuestionScreen extends StatefulWidget {
-  const ExamQuestionScreen({Key? key, required this.questionModel, required this.questionIndex, required this.questionList}) : super(key: key);
+  ExamQuestionScreen({Key? key, required this.questionModel, required this.questionIndex, required this.questionList, required this.changeQuestion}) : super(key: key);
 
   final QuestionModel questionModel;
   final List<QuestionModel> questionList;
-  final questionIndex;
+  int questionIndex;
 
+  Function changeQuestion;
 
   @override
   State<ExamQuestionScreen> createState() => _ExamQuestionScreenState();
 }
 
 class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
+
+  changeQuestion(int value) {
+    this.widget.changeQuestion(value);
+  }
+
+/*  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }*/
+
 
   Widget get getQuestion => (this.widget.questionModel!.imagePath ?? '').length > 0
       ?
@@ -31,7 +43,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
     children: [
       Image.memory(
         base64.decode(this.widget.questionModel!.imagePath!),
-        //width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         height: 95,
         fit: BoxFit.fill,
       ),
@@ -73,14 +85,14 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
           ? CircularProgressIndicator()
           : Column(
         children: [
-          ExamQuestionNumberScreen(questionIndex: this.widget.questionIndex, questionList: this.widget.questionList,),
+          ExamQuestionNumberScreen(questionIndex: this.widget.questionIndex, questionList: this.widget.questionList, changeQuestion: this.changeQuestion),
           Expanded(
             flex: 5,
             child: Card(
               margin: EdgeInsets.all(6),
               color: Colors.teal[200],
               child: Center(
-                  child: Text('${this.widget.questionModel!.nameAz}')// getQuestion,
+                  child:  getQuestion,
               ),
             ),
           ),
