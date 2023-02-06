@@ -9,18 +9,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(iconData: Icons.drive_eta_rounded, isCenter: true, caption:"Sürücülük imtahanı", ),
-
-      /*AppBar(
-        centerTitle: true,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Icon(Icons.drive_eta_rounded),
-            Text("Sürücülük imtahanı"),
-          ],
-        ),
-      ),*/
       body: Container(
         decoration: BoxDecoration(
           gradient: const SweepGradient(

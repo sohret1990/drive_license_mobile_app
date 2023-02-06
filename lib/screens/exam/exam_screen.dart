@@ -18,11 +18,12 @@ class _ExamScreenState extends State<ExamScreen> {
   List<QuestionModel> questionList = [];
 
   Future<List<QuestionModel>> getList() async {
-    var data = await _examController.getExamQuestions();
-    return data;
+    if (questionList.length == 0)
+      this.questionList = await _examController.getExamQuestions();
+    return this.questionList;
   }
 
-  changeQuestion(int value){
+  changeQuestion(int value) {
     print(value);
     setState(() {
       this.questionIndex = value;
