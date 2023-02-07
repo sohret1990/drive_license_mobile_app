@@ -6,7 +6,7 @@ class MyAppBar extends AppBar{
   IconData? iconData;
   bool? isCenter = true;
 
-  MyAppBar({this.iconData, this.isCenter, required this.caption}) {
+  MyAppBar({this.iconData, this.isCenter, required this.caption, }) {
 
     this.caption = caption;
     this.isCenter = isCenter;
@@ -14,10 +14,16 @@ class MyAppBar extends AppBar{
 
   }
 
+  @override
+  // TODO: implement centerTitle
+  bool? get centerTitle => this.isCenter;
+
+
 @override
 // TODO: implement title
   Widget? get title => this.iconData != null? Container(
     child: Row(
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

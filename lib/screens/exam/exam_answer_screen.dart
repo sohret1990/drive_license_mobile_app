@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,11 +23,21 @@ class ExamAnswer extends StatelessWidget {
             return Card(
               child: ListTile(
                 onTap: (){
-                  if(index+1 == questionModel!.correctAnswer.answerNo){
+
+
+
+                  /*AssetsAudioPlayer.newPlayer().open(
+                    Audio("assets/raw/correct.mp3"),
+                    autoStart: true,
+                    headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug
+                  );*/
+
+
+                  /*if(index+1 == questionModel!.correctAnswer.answerNo){
                     Get.defaultDialog(title:'Təbriklər oğru cavablandırdınız!',  );
                   }else{
                     Get.defaultDialog(title:'Təəssüf cavab səhvdir!',  );
-                  }
+                  }*/
                 },
                 leading: Container(
                   child: Padding(

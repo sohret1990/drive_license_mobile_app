@@ -24,7 +24,6 @@ class _ExamScreenState extends State<ExamScreen> {
   }
 
   changeQuestion(int value) {
-    print(value);
     setState(() {
       this.questionIndex = value;
     });
@@ -34,10 +33,46 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Colors.teal[50],
+        width: MediaQuery.of(context).size.width / 1.5,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            Card(
+              color: Colors.teal,
+              child: ListTile(
+                onTap: (){
+                  Get.offNamed("/home");
+                },
+                title: Text("Əsas səhifə"),
+              ),
+            ),
+            Card(
+              color: Colors.teal,
+              child: ListTile(
+                onTap: (){
+                  Get.offNamed("/question");
+                },
+                title: Text("Suallar"),
+              ),
+            ),
+            Card(
+              color: Colors.teal,
+              child: ListTile(
+                onTap: (){
+                  Get.offNamed("/subject");
+                },
+                title: Text("Mövzular"),
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30),
+        preferredSize: Size.fromHeight(35),
         child: MyAppBar(
-          iconData: Icons.checklist,
+          iconData: null, // Icons.checklist,
           isCenter: true,
           caption: "Sınaq imtahanı",
         ),
@@ -48,7 +83,7 @@ class _ExamScreenState extends State<ExamScreen> {
         builder: (context, snapshot) {
           Widget screen;
           if (snapshot.hasData && snapshot.data is List<QuestionModel>) {
-            print(snapshot.data);
+
             this.questionList = snapshot!.data as List<QuestionModel>;
 
             if (this.questionList.isEmpty) {

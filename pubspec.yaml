@@ -41,6 +41,9 @@ dependencies:
   dio: ^4.0.6
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  infinite_scroll_pagination: ^3.2.0
+  animated_bottom_navigation_bar: ^1.1.0+1
+  audioplayers: ^3.0.1
 
 dev_dependencies:
   flutter_test:

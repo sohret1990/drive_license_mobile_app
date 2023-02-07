@@ -41,7 +41,9 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed("/subject");
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [Icon(Icons.subject), Text("Mövzular")],
@@ -60,7 +62,9 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed("/rule");
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [Icon(Icons.rule), Text("Qaydalar")],
