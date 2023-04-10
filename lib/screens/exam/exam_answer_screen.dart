@@ -42,19 +42,11 @@ class ExamAnswer extends StatelessWidget {
                 enabled: answerMap[questionModel.id] == null,
                 tileColor: getColor(index),
                 onTap: () async {
+                  //check question option
                   if (answerMap[questionModel.id] != null) return;
 
                   answerMap[questionModel.id] = index;
-
-                  //var data = context.findAncestorWidgetOfExactType();
-
                   getColor(index);
-
-                  /*if(index+1 == questionModel!.correctAnswer.answerNo){
-                    Get.defaultDialog(title:'Təbriklər oğru cavablandırdınız!',  );
-                  }else{
-                    Get.defaultDialog(title:'Təəssüf cavab səhvdir!',  );
-                  }*/
                 },
                 leading: Container(
                   child: Padding(
