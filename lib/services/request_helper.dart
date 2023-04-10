@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:drive_license_app/models/question_model.dart';
 
 class RequestHelper {
-  final _baseUrl = "http://10.0.2.2:3000";
+  final _baseUrl = "http://api.drivelicense.azerp.org:81/";
 
   get dio => Dio(BaseOptions(baseUrl: _baseUrl));
 

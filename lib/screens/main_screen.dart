@@ -46,7 +46,7 @@ class MainScreen extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [Icon(Icons.subject), Text("Mövzular")],
+                  children: const [Icon(Icons.subject), Text("Mövzular")],
                 ),
               ),
               ElevatedButton(
@@ -55,7 +55,7 @@ class MainScreen extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+                  children:const [
                     Icon(Icons.question_mark_outlined),
                     Text("Suallar")
                   ],
@@ -67,7 +67,7 @@ class MainScreen extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [Icon(Icons.rule), Text("Qaydalar")],
+                  children: const [Icon(Icons.rule), Text("Qaydalar")],
                 ),
               ),
               SizedBox(

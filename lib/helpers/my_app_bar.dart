@@ -8,9 +8,9 @@ class MyAppBar extends AppBar{
 
   MyAppBar({this.iconData, this.isCenter, required this.caption, }) {
 
-    this.caption = caption;
-    this.isCenter = isCenter;
-    this.iconData = iconData;
+    caption = caption;
+    isCenter = isCenter;
+    iconData = iconData;
 
   }
 
@@ -21,16 +21,14 @@ class MyAppBar extends AppBar{
 
 @override
 // TODO: implement title
-  Widget? get title => this.iconData != null? Container(
-    child: Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Icon(this.iconData),
-        Text(caption),
-      ],
-    ),
+  Widget? get title => iconData != null? Row(
+    mainAxisSize: MainAxisSize.max,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Icon(iconData),
+      Text(caption),
+    ],
   ):Text(caption);
 
 

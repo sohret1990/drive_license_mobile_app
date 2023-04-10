@@ -1,7 +1,5 @@
 import 'package:drive_license_app/bindings/exam_binding.dart';
-import 'package:drive_license_app/bindings/rule_binding.dart';
 import 'package:drive_license_app/screens/exam/exam_screen.dart';
-import 'package:drive_license_app/screens/rule/rule_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,10 +29,10 @@ class DriveLicenseApp extends StatelessWidget {
             name: "/exam",
             page: () => ExamScreen(),
             binding: ExamBinding()),
-        GetPage(
+       /* GetPage(
             name: "/rule",
             page: () => RuleScreen(),
-            binding: RuleBinding()),
+            binding: RuleBinding()),*/
       ],
       home: MainScreen(),
     );

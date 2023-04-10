@@ -10,12 +10,12 @@ import 'package:get/get.dart';
 
 
 class ExamQuestionScreen extends StatefulWidget {
-  ExamQuestionScreen({Key? key, required this.questionModel, required this.questionIndex, required this.questionList, required this.changeQuestion}) : super(key: key);
+  ExamQuestionScreen({Key? key, required this.questionModel, required this.questionIndex, required this.questionList, required this.changeQuestion,required this.answerMap}) : super(key: key);
 
   final QuestionModel questionModel;
   final List<QuestionModel> questionList;
   int questionIndex;
-
+  final Map<int, int> answerMap;
   Function changeQuestion;
 
   @override
@@ -35,14 +35,14 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
   }*/
 
 
-  Widget get getQuestion => (this.widget.questionModel!.imagePath ?? '').length > 0
+  Widget get getQuestion => (this.widget.questionModel.imagePath ?? '').length > 0
       ?
   // check if imagePath exists. Here is the problem
   Column(
     mainAxisSize: MainAxisSize.max,
     children: [
       Image.memory(
-        base64.decode(this.widget.questionModel!.imagePath!),
+        base64.decode(this.widget.questionModel.imagePath!),
         width: MediaQuery.of(context).size.width,
         height: 95,
         fit: BoxFit.fill,
@@ -53,7 +53,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              this.widget.questionModel!.nameAz,
+              this.widget.questionModel.nameAz,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
             ),
@@ -69,7 +69,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
     children: [
       Center(
         child: Text(
-          this.widget.questionModel!.nameAz,
+          this.widget.questionModel.nameAz,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
         ),
@@ -96,7 +96,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
               ),
             ),
           ),
-          ExamAnswer(questionModel: this.widget.questionModel!,)
+          ExamAnswer(questionModel: this.widget.questionModel, answerMap: this.widget.answerMap,)
         ],
       ),
     );

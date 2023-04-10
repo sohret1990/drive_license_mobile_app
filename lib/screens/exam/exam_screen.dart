@@ -16,6 +16,7 @@ class _ExamScreenState extends State<ExamScreen> {
   ExamController _examController = Get.find<ExamController>();
   QuestionModel? questionModel;
   List<QuestionModel> questionList = [];
+  var answerMap = new Map<int, int>();
 
   Future<List<QuestionModel>> getList() async {
     if (questionList.length == 0)
@@ -33,7 +34,7 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
+   /*   drawer: Drawer(
         backgroundColor: Colors.teal[50],
         width: MediaQuery.of(context).size.width / 1.5,
         child: ListView(
@@ -68,7 +69,7 @@ class _ExamScreenState extends State<ExamScreen> {
             ),
           ],
         ),
-      ),
+      ),*/
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(35),
         child: MyAppBar(
@@ -84,7 +85,7 @@ class _ExamScreenState extends State<ExamScreen> {
           Widget screen;
           if (snapshot.hasData && snapshot.data is List<QuestionModel>) {
 
-            this.questionList = snapshot!.data as List<QuestionModel>;
+            this.questionList = snapshot.data as List<QuestionModel>;
 
             if (this.questionList.isEmpty) {
               screen = Center(child: CircularProgressIndicator());
@@ -95,6 +96,7 @@ class _ExamScreenState extends State<ExamScreen> {
                 questionModel: this.questionModel!,
                 questionList: this.questionList,
                 changeQuestion: this.changeQuestion,
+                answerMap: this.answerMap,
               );
             }
           } else if (snapshot.hasError) {

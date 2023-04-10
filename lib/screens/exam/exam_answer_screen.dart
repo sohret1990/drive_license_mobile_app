@@ -1,11 +1,31 @@
-import 'package:audioplayers/audioplayers.dart';
+// ignore_for_file: sort_child_properties_last
+
 import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ExamAnswer extends StatelessWidget {
-  const ExamAnswer({Key? key, required this.questionModel}) : super(key: key);
+  const ExamAnswer({Key? key, required this.questionModel, required this.answerMap})
+      : super(key: key);
   final QuestionModel questionModel;
+  final Map<int, int> answerMap ;
+
+  Color getColor(int index) {
+    Color bg = Colors.white;
+
+    if (answerMap.containsKey(questionModel.id) &&
+        answerMap.entries.firstWhere((x) => x.key == questionModel.id).value ==
+            index) {
+      var selectedAnswerNo =
+          answerMap.entries.firstWhere((x) => x.key == questionModel.id).value;
+      if (selectedAnswerNo + 1 == questionModel.correctAnswer.answerNo) {
+        bg = Colors.green;
+      } else {
+        bg = Colors.red;
+      }
+    }
+    return bg;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,24 +34,21 @@ class ExamAnswer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: ListView.builder(
-          itemCount: this.questionModel == null
-              ? 0
-              : this.questionModel!.questionAnswer.length,
+          itemCount: questionModel.questionAnswer.length,
           itemBuilder: (context, index) {
-            var answer =
-            this.questionModel!.questionAnswer[index];
+            var answer = questionModel.questionAnswer[index];
             return Card(
               child: ListTile(
-                onTap: (){
+                enabled: answerMap[questionModel.id] == null,
+                tileColor: getColor(index),
+                onTap: () async {
+                  if (answerMap[questionModel.id] != null) return;
 
+                  answerMap[questionModel.id] = index;
 
+                  //var data = context.findAncestorWidgetOfExactType();
 
-                  /*AssetsAudioPlayer.newPlayer().open(
-                    Audio("assets/raw/correct.mp3"),
-                    autoStart: true,
-                    headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug
-                  );*/
-
+                  getColor(index);
 
                   /*if(index+1 == questionModel!.correctAnswer.answerNo){
                     Get.defaultDialog(title:'Təbriklər oğru cavablandırdınız!',  );
@@ -43,14 +60,13 @@ class ExamAnswer extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text('${index + 1}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center),
                   ),
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    gradient: RadialGradient(
+                    gradient: const RadialGradient(
                         colors: [Colors.tealAccent, Colors.teal]),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
@@ -58,17 +74,14 @@ class ExamAnswer extends StatelessWidget {
                         color: Colors.teal.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 1,
-                        offset: Offset(
-                            0, 1), // changes position of shadow
+                        offset: const Offset(0, 1), // changes position of shadow
                       ),
                     ],
                   ),
                 ),
                 title: Text(
-                  '${answer.answer.nameAz}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 11),
+                  answer.answer.nameAz,
+                  style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 11),
                 ),
               ),
             );
