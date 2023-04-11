@@ -4,21 +4,26 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ExamAnswer extends StatelessWidget {
+class ExamAnswer extends StatefulWidget {
   const ExamAnswer({Key? key, required this.questionModel, required this.answerMap})
       : super(key: key);
   final QuestionModel questionModel;
   final Map<int, int> answerMap ;
 
+  @override
+  State<ExamAnswer> createState() => _ExamAnswerState();
+}
+
+class _ExamAnswerState extends State<ExamAnswer> {
   Color getColor(int index) {
     Color bg = Colors.white;
 
-    if (answerMap.containsKey(questionModel.id) &&
-        answerMap.entries.firstWhere((x) => x.key == questionModel.id).value ==
+    if (widget.answerMap.containsKey(widget.questionModel.id) &&
+        widget.answerMap.entries.firstWhere((x) => x.key == widget.questionModel.id).value ==
             index) {
       var selectedAnswerNo =
-          answerMap.entries.firstWhere((x) => x.key == questionModel.id).value;
-      if (selectedAnswerNo + 1 == questionModel.correctAnswer.answerNo) {
+          widget.answerMap.entries.firstWhere((x) => x.key == widget.questionModel.id).value;
+      if (selectedAnswerNo + 1 == widget.questionModel.correctAnswer.answerNo) {
         bg = Colors.green;
       } else {
         bg = Colors.red;
@@ -34,19 +39,20 @@ class ExamAnswer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: ListView.builder(
-          itemCount: questionModel.questionAnswer.length,
+          itemCount: widget.questionModel.questionAnswer.length,
           itemBuilder: (context, index) {
-            var answer = questionModel.questionAnswer[index];
+            var answer = widget.questionModel.questionAnswer[index];
             return Card(
               child: ListTile(
-                enabled: answerMap[questionModel.id] == null,
+                enabled: widget.answerMap[widget.questionModel.id] == null,
                 tileColor: getColor(index),
                 onTap: () async {
                   //check question option
-                  if (answerMap[questionModel.id] != null) return;
-
-                  answerMap[questionModel.id] = index;
-                  getColor(index);
+                  if (widget.answerMap[widget.questionModel.id] != null) return;
+                  widget.answerMap[widget.questionModel.id] = index;
+                  setState(() {
+                    getColor(index);
+                  });
                 },
                 leading: Container(
                   child: Padding(

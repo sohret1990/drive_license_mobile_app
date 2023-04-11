@@ -1,3 +1,4 @@
+import 'package:drive_license_app/helpers/my_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class RuleScreen extends StatefulWidget {
@@ -10,8 +11,9 @@ class RuleScreen extends StatefulWidget {
 class _RuleScreenState extends State<RuleScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+      appBar: MyAppBar(iconData: null, isCenter: true, caption: "Qaydalar",),
+      body: Center(
         child: Text("Qaydalar"),
       ),
     );
