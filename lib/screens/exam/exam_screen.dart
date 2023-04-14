@@ -34,42 +34,6 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-   /*   drawer: Drawer(
-        backgroundColor: Colors.teal[50],
-        width: MediaQuery.of(context).size.width / 1.5,
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          children: [
-            Card(
-              color: Colors.teal,
-              child: ListTile(
-                onTap: (){
-                  Get.offNamed("/home");
-                },
-                title: Text("Əsas səhifə"),
-              ),
-            ),
-            Card(
-              color: Colors.teal,
-              child: ListTile(
-                onTap: (){
-                  Get.offNamed("/question");
-                },
-                title: Text("Suallar"),
-              ),
-            ),
-            Card(
-              color: Colors.teal,
-              child: ListTile(
-                onTap: (){
-                  Get.offNamed("/subject");
-                },
-                title: Text("Mövzular"),
-              ),
-            ),
-          ],
-        ),
-      ),*/
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(35),
         child: MyAppBar(

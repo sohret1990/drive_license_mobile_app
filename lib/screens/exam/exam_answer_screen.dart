@@ -2,13 +2,17 @@
 
 import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ExamAnswer extends StatefulWidget {
-  const ExamAnswer({Key? key, required this.questionModel, required this.answerMap})
+  const ExamAnswer(
+      {Key? key,
+      required this.questionModel,
+      required this.answerMap,
+      required this.questionList})
       : super(key: key);
   final QuestionModel questionModel;
-  final Map<int, int> answerMap ;
+  final List<QuestionModel> questionList;
+  final Map<int, int> answerMap;
 
   @override
   State<ExamAnswer> createState() => _ExamAnswerState();
@@ -19,10 +23,13 @@ class _ExamAnswerState extends State<ExamAnswer> {
     Color bg = Colors.white;
 
     if (widget.answerMap.containsKey(widget.questionModel.id) &&
-        widget.answerMap.entries.firstWhere((x) => x.key == widget.questionModel.id).value ==
+        widget.answerMap.entries
+                .firstWhere((x) => x.key == widget.questionModel.id)
+                .value ==
             index) {
-      var selectedAnswerNo =
-          widget.answerMap.entries.firstWhere((x) => x.key == widget.questionModel.id).value;
+      var selectedAnswerNo = widget.answerMap.entries
+          .firstWhere((x) => x.key == widget.questionModel.id)
+          .value;
       if (selectedAnswerNo + 1 == widget.questionModel.correctAnswer.answerNo) {
         bg = Colors.green;
       } else {
@@ -31,9 +38,10 @@ class _ExamAnswerState extends State<ExamAnswer> {
     }
     return bg;
   }
-
+  int mistakesCount = 0;
   @override
   Widget build(BuildContext context) {
+
     return Expanded(
       flex: 8,
       child: Padding(
@@ -44,11 +52,22 @@ class _ExamAnswerState extends State<ExamAnswer> {
             var answer = widget.questionModel.questionAnswer[index];
             return Card(
               child: ListTile(
-                enabled: widget.answerMap[widget.questionModel.id] == null,
+                enabled: widget.answerMap[widget.questionModel.id] == null &&
+                    mistakesCount >= 2,
                 tileColor: getColor(index),
                 onTap: () async {
+
+
+                  for (int i = 0; i < widget.questionList.length; i++) {
+                    var q = widget.questionList[i];
+                    var a = widget.answerMap[i];
+                    if (q.correctAnswer != a) {
+                      mistakesCount++;
+                    }
+                  }
+
                   //check question option
-                  if (widget.answerMap[widget.questionModel.id] != null) return;
+                  if (widget.answerMap[widget.questionModel.id] != null ) return;
                   widget.answerMap[widget.questionModel.id] = index;
                   setState(() {
                     getColor(index);
@@ -72,14 +91,16 @@ class _ExamAnswerState extends State<ExamAnswer> {
                         color: Colors.teal.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 1,
-                        offset: const Offset(0, 1), // changes position of shadow
+                        offset:
+                            const Offset(0, 1), // changes position of shadow
                       ),
                     ],
                   ),
                 ),
                 title: Text(
                   answer.answer.nameAz,
-                  style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 11),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.normal, fontSize: 11),
                 ),
               ),
             );

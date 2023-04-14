@@ -96,7 +96,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
               ),
             ),
           ),
-          ExamAnswer(questionModel: this.widget.questionModel, answerMap: this.widget.answerMap,)
+          ExamAnswer(questionModel: this.widget.questionModel, answerMap: this.widget.answerMap,questionList: this.widget.questionList,)
         ],
       ),
     );
