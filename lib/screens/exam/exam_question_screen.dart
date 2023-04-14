@@ -28,13 +28,6 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
     this.widget.changeQuestion(value);
   }
 
-/*  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }*/
-
-
   Widget get getQuestion => (this.widget.questionModel.imagePath ?? '').length > 0
       ?
   // check if imagePath exists. Here is the problem

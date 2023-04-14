@@ -10,7 +10,6 @@ class QuestionController extends BaseController {
 
     var list = data.data as List<dynamic>;
     var dataList = list.map((e) => QuestionModel.fromJson(e));
-    print(dataList);
     return dataList.toList();
   }
 }

@@ -31,11 +31,11 @@ class DriveLicenseApp extends StatelessWidget {
             binding: QuestionBinding()),
         GetPage(
             name: "/exam",
-            page: () => ExamScreen(),
+            page: () => const ExamScreen(),
             binding: ExamBinding()),
         GetPage(
             name: "/subject",
-            page: () => SubjectScreen(),
+            page: () => const SubjectScreen(),
             binding: SubjectBinding()),
         GetPage(
             name: "/rule",

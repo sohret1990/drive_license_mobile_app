@@ -4,12 +4,14 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamAnswer extends StatefulWidget {
-  const ExamAnswer(
+  ExamAnswer(
       {Key? key,
       required this.questionModel,
       required this.answerMap,
       required this.questionList})
       : super(key: key);
+
+
   final QuestionModel questionModel;
   final List<QuestionModel> questionList;
   final Map<int, int> answerMap;
@@ -38,10 +40,9 @@ class _ExamAnswerState extends State<ExamAnswer> {
     }
     return bg;
   }
-  int mistakesCount = 0;
+
   @override
   Widget build(BuildContext context) {
-
     return Expanded(
       flex: 8,
       child: Padding(
@@ -50,24 +51,27 @@ class _ExamAnswerState extends State<ExamAnswer> {
           itemCount: widget.questionModel.questionAnswer.length,
           itemBuilder: (context, index) {
             var answer = widget.questionModel.questionAnswer[index];
+            int mistakesCount = 0;
+            for (int i = 0; i < widget.questionList.length; i++) {
+              var q = widget.questionList[i];
+              if (widget.answerMap.containsKey(q.id)) {
+                var a = widget.answerMap[q.id];
+
+                if (q.correctAnswer.answerNo != a!+1) {
+                  mistakesCount++;
+                }
+              }
+            }
+
             return Card(
               child: ListTile(
                 enabled: widget.answerMap[widget.questionModel.id] == null &&
-                    mistakesCount >= 2,
+                    mistakesCount <= 1,
                 tileColor: getColor(index),
                 onTap: () async {
-
-
-                  for (int i = 0; i < widget.questionList.length; i++) {
-                    var q = widget.questionList[i];
-                    var a = widget.answerMap[i];
-                    if (q.correctAnswer != a) {
-                      mistakesCount++;
-                    }
-                  }
-
                   //check question option
-                  if (widget.answerMap[widget.questionModel.id] != null ) return;
+                  if (widget.answerMap[widget.questionModel.id] != null) return;
+
                   widget.answerMap[widget.questionModel.id] = index;
                   setState(() {
                     getColor(index);
