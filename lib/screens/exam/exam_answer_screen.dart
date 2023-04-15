@@ -4,17 +4,21 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamAnswer extends StatefulWidget {
-  ExamAnswer(
-      {Key? key,
-      required this.questionModel,
-      required this.answerMap,
-      required this.questionList})
-      : super(key: key);
-
+  ExamAnswer({
+    Key? key,
+    required this.questionModel,
+    required this.answerMap,
+    required this.questionList,
+    required this.mistakesCount,
+    required this.incrementMistakes,
+  }) : super(key: key);
 
   final QuestionModel questionModel;
   final List<QuestionModel> questionList;
   final Map<int, int> answerMap;
+  final int mistakesCount;
+
+  final Function incrementMistakes;
 
   @override
   State<ExamAnswer> createState() => _ExamAnswerState();
@@ -41,6 +45,8 @@ class _ExamAnswerState extends State<ExamAnswer> {
     return bg;
   }
 
+  _ExamAnswerState() {}
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -51,22 +57,11 @@ class _ExamAnswerState extends State<ExamAnswer> {
           itemCount: widget.questionModel.questionAnswer.length,
           itemBuilder: (context, index) {
             var answer = widget.questionModel.questionAnswer[index];
-            int mistakesCount = 0;
-            for (int i = 0; i < widget.questionList.length; i++) {
-              var q = widget.questionList[i];
-              if (widget.answerMap.containsKey(q.id)) {
-                var a = widget.answerMap[q.id];
-
-                if (q.correctAnswer.answerNo != a!+1) {
-                  mistakesCount++;
-                }
-              }
-            }
 
             return Card(
               child: ListTile(
                 enabled: widget.answerMap[widget.questionModel.id] == null &&
-                    mistakesCount <= 1,
+                    this.widget.mistakesCount <= 1,
                 tileColor: getColor(index),
                 onTap: () async {
                   //check question option
@@ -76,6 +71,11 @@ class _ExamAnswerState extends State<ExamAnswer> {
                   setState(() {
                     getColor(index);
                   });
+
+                  if (widget.questionModel.correctAnswer.answerNo !=
+                      index + 1) {
+                    this.widget.incrementMistakes();
+                  }
                 },
                 leading: Container(
                   child: Padding(

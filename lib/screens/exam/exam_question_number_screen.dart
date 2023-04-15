@@ -2,8 +2,14 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamQuestionNumberScreen extends StatelessWidget {
-  ExamQuestionNumberScreen({Key? key, required this.questionIndex, required this.questionList, required this.changeQuestion }) : super(key: key);
-  int questionIndex ;
+  ExamQuestionNumberScreen({
+    Key? key,
+    required this.questionIndex,
+    required this.questionList,
+    required this.changeQuestion,
+  }) : super(key: key);
+  int questionIndex;
+
   final List<QuestionModel> questionList;
 
   Function changeQuestion;
@@ -32,47 +38,38 @@ class ExamQuestionNumberScreen extends StatelessWidget {
                       height: 10,
                       decoration: questionIndex != index
                           ? BoxDecoration(
-                        gradient: const RadialGradient(colors: [
-                          Colors.tealAccent,
-                          Colors.teal
-                        ]),
-                        borderRadius:
-                        BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.teal
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 1,
-                            offset: const Offset(0,
-                                1), // changes position of shadow
-                          ),
-                        ],
-                      )
+                              gradient: const RadialGradient(
+                                  colors: [Colors.tealAccent, Colors.teal]),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.teal.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: const Offset(
+                                      0, 1), // changes position of shadow
+                                ),
+                              ],
+                            )
                           : BoxDecoration(
-                        gradient: const RadialGradient(colors: [
-                          Colors.orangeAccent,
-                          Colors.orange
-                        ]),
-                        borderRadius:
-                        BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.orange
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 1,
-                            offset: const Offset(0,
-                                1), // changes position of shadow
-                          ),
-                        ],
-                      ),
+                              gradient: const RadialGradient(
+                                  colors: [Colors.orangeAccent, Colors.orange]),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.orange.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: const Offset(
+                                      0, 1), // changes position of shadow
+                                ),
+                              ],
+                            ),
                       margin: const EdgeInsets.only(left: 1, right: 1),
                       child: Padding(
                         padding: const EdgeInsets.all(6),
                         child: Text('${index + 1}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center),
                       ),
                     ),

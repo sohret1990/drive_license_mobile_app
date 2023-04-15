@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ExamResult extends StatefulWidget {
-  const ExamResult({Key? key}) : super(key: key);
+class ExamResultScreen extends StatefulWidget {
+  const ExamResultScreen({Key? key}) : super(key: key);
 
   @override
-  State<ExamResult> createState() => _ExamResultState();
+  State<ExamResultScreen> createState() => _ExamResultScreenState();
 }
 
-class _ExamResultState extends State<ExamResult> {
+class _ExamResultScreenState extends State<ExamResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
