@@ -41,14 +41,15 @@ class _ExamScreenState extends State<ExamScreen> {
   }
 
   Widget build(BuildContext context) {
-
-    if(this.mistakesCount >1){
-      return ExamResultScreen();
+    if (this.mistakesCount > 1) {
+      return const ExamResultScreen(
+        isSuccessed: false,
+      );
     }
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(35),
+        preferredSize: const Size.fromHeight(35),
         child: MyAppBar(
           iconData: null, // Icons.checklist,
           isCenter: true,
@@ -85,6 +86,16 @@ class _ExamScreenState extends State<ExamScreen> {
           return screen;
         },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: GestureDetector(
+        child: Container(
+          child: Icon(Icons.exit_to_app),
+        ),
+        onTap: (){
+          Get.replace("home");
+        },
+      ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 }
