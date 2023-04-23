@@ -41,18 +41,18 @@ class _SubjectScreenState extends State<SubjectScreen> {
                     },
                     child: Card(
                       child: ListTile(
-                        title: Text(section.nameAz),
+                        title: Text(section.nameAz, style: TextStyle(fontSize: 14)),
                         leading: Container(
                           alignment: Alignment.center,
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
                             gradient: const RadialGradient(
-                                colors: [Colors.tealAccent, Colors.teal]),
+                                colors: [Colors.indigoAccent, Colors.indigo]),
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.teal.withOpacity(0.5),
+                                color: Colors.indigo.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 1,
                                 offset: const Offset(
@@ -60,7 +60,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                               ),
                             ],
                           ),
-                          child: Text("${index+1}", style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text("${index+1}", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,)),
                         ),
                       ),
                     ),
@@ -69,7 +69,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
           } else {
             return  Center(
               child: CircularProgressIndicator(
-                color: Colors.teal,
+                color: Colors.indigo,
               ),
             );
           }

@@ -62,7 +62,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
                   child: Text(
                     this.widget.questionModel.nameAz,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
               ),
@@ -78,7 +78,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
               child: Text(
                 this.widget.questionModel.nameAz,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
           ],
@@ -100,7 +100,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
                   flex: 5,
                   child: Card(
                     margin: EdgeInsets.all(6),
-                    color: Colors.teal[200],
+                    color: Colors.indigo[400],
                     child: Center(
                       child: getQuestion,
                     ),

@@ -40,10 +40,10 @@ class DriveLicenseApp extends StatelessWidget {
             binding: SubjectBinding()),
         GetPage(
             name: "/rule",
-            page: () => RuleScreen(),
+            page: () => const RuleScreen(),
             binding: RuleBinding()),
       ],
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }

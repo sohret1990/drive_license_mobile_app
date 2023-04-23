@@ -42,8 +42,10 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget build(BuildContext context) {
     if (this.mistakesCount > 1) {
-      return const ExamResultScreen(
+      return ExamResultScreen(
         isSuccessed: false,
+        answersList: this.answerMap,
+        questionList: this.questionList,
       );
     }
 

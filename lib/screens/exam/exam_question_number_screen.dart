@@ -39,11 +39,11 @@ class ExamQuestionNumberScreen extends StatelessWidget {
                       decoration: questionIndex != index
                           ? BoxDecoration(
                               gradient: const RadialGradient(
-                                  colors: [Colors.tealAccent, Colors.teal]),
+                                  colors: [Colors.indigoAccent, Colors.indigo]),
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.teal.withOpacity(0.5),
+                                  color: Colors.indigo.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 1,
                                   offset: const Offset(
@@ -69,7 +69,7 @@ class ExamQuestionNumberScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(6),
                         child: Text('${index + 1}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                             textAlign: TextAlign.center),
                       ),
                     ),
