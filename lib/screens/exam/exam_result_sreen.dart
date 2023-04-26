@@ -3,7 +3,11 @@ import 'package:drive_license_app/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ExamResultScreen extends StatefulWidget {
-  const ExamResultScreen({Key? key, required this.isSuccessed, required this.questionList, required this.answersList})
+  const ExamResultScreen(
+      {Key? key,
+      required this.isSuccessed,
+      required this.questionList,
+      required this.answersList})
       : super(key: key);
   final bool isSuccessed;
   final List<QuestionModel> questionList;
@@ -18,16 +22,21 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
-        iconData: Icons.point_of_sale_outlined,
+        iconData: Icons.receipt_sharp,
         isCenter: false,
         caption: "",
       ),
-      body: Container(
-        color: this.widget.isSuccessed? Colors.lightGreenAccent: Colors.deepOrangeAccent,
-        child: const Center(
-          child: Text("İmtahan nəticəsi!"),
-        ),
-      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image(image: AssetImage("assets/images/drive_license.png"),
+            fit: BoxFit.fitWidth,
+
+            ),
+          )
+        ],
+      )
     );
   }
 }

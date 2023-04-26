@@ -25,7 +25,6 @@ class DriveLicenseApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme().materialTheme,
       getPages: [
-
         GetPage(
             name: "/question",
             page: () => QuestionScreen(),
@@ -42,6 +41,11 @@ class DriveLicenseApp extends StatelessWidget {
             name: "/rule",
             page: () => const RuleScreen(),
             binding: RuleBinding()),
+        GetPage(
+          name: "/main",
+          page: () => const MainScreen(),
+        //  binding: RuleBinding(),
+        ),
       ],
       home: const MainScreen(),
     );

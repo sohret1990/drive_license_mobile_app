@@ -1,3 +1,4 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:drive_license_app/controllers/exam_controller.dart';
 import 'package:drive_license_app/helpers/my_app_bar.dart';
 import 'package:drive_license_app/models/question_model.dart';
@@ -56,6 +57,27 @@ class _ExamScreenState extends State<ExamScreen> {
           iconData: null, // Icons.checklist,
           isCenter: true,
           caption: "Sınaq imtahanı",
+          actionList: [
+            MaterialButton(
+              visualDensity: VisualDensity.comfortable,
+              child: Icon(
+                Icons.power_settings_new,
+                color: Colors.white,
+              ),
+              onPressed: () async {
+                if (await confirm(context,
+                    title: Row(children:[Text("Çıxış")], mainAxisAlignment: MainAxisAlignment.center),
+                    content: Container(
+                      height: 40,
+                      child: Text("Çıxmaq istədiyinizdən əminsiniz?"),
+                    ),
+                    textCancel: Text("Xeyr"),
+                    textOK: Text("Bəli"))) {
+                  Get.offAllNamed("main");
+                } else {}
+              },
+            )
+          ],
         ),
       ),
       body: FutureBuilder(
@@ -88,16 +110,6 @@ class _ExamScreenState extends State<ExamScreen> {
           return screen;
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: GestureDetector(
-        child: Container(
-          child: Icon(Icons.exit_to_app),
-        ),
-        onTap: (){
-          Get.replace("home");
-        },
-      ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 }
