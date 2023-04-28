@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.drivelicense.app.drive_license_app">
    <application
-        android:label="drive_license_app"
+        android:label="Yol hərəkəti qaydaları"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

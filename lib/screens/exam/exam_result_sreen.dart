@@ -25,8 +25,8 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
     return Scaffold(
       appBar: MyAppBar(
         iconData: null, // Icons.receipt_sharp,
-        isCenter: false,
-        caption: "",
+        isCenter: true,
+        caption: "Sizin imtahan nəticəniz",
       ),
       backgroundColor: Colors.indigoAccent,
       body: Container(
@@ -80,9 +80,11 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
                 SizedBox.fromSize(size: Size.fromHeight(20)),
                 Text("Cəmi: 10", style: TextStyle(fontSize: 20)),
                 SizedBox.fromSize(size: Size.fromHeight(5)),
-                Text("Düzgün cavab: ${getCorrectAnswerCount()}", style: TextStyle(fontSize: 20)),
+                Text("Düzgün cavab: ${getCorrectAnswerCount()}",
+                    style: TextStyle(fontSize: 20)),
                 SizedBox.fromSize(size: Size.fromHeight(5)),
-                Text("Səhv cavab: ${getWrongAnswerCount()}", style: TextStyle(fontSize: 20)),
+                Text("Səhv cavab: ${getWrongAnswerCount()}",
+                    style: TextStyle(fontSize: 20)),
                 SizedBox.fromSize(size: Size.fromHeight(5)),
                 getQuestionPanel(),
               ],
@@ -96,30 +98,60 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
   Widget getQuestionPanel() {
     return Expanded(
       flex: 1,
-      child: ListView.builder(
+      child: Center(child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: this.widget.questionList.length,
+          itemCount: widget.questionList.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(1.0),
               child: Image(
-                width: 20,
-                height: 20,
+                width: 25,
+                height: 25,
                 image: AssetImage(
-                    "assets/images/azpdd/button${(index % 2 == 0) ? "${index + 1}selected" : index + 1}.jpg"),
+                    "assets/images/azpdd/button${checkQuestionAnswer(widget.questionList[index]) ? index + 1 : "${index + 1}selected"}.jpg"),
               ),
             );
           }),
+      ),
     );
   }
 
-  int getCorrectAnswerCount(){
-    var questions =this.widget.questionList;
-    var answers =this.widget.answersList;
-    return questions.where((q) => q.correctAnswer.answerNo == answers.entries ).length;
+  int getCorrectAnswerCount() {
+    var questions = widget.questionList;
+    var answers = widget.answersList;
+    return answers.entries
+        .where((x) =>
+            questions
+                .where((z) => z.id == x.key)
+                .first
+                .correctAnswer
+                .answerNo ==
+            x.value + 1)
+        .length;
+    //return questions.where((q) => q.correctAnswer.answerNo == answers.entries.where((z) => z.key == q.id).first.value ).length;
   }
 
-  int getWrongAnswerCount(){
-    return this.widget.questionList.where((element) => element.correctAnswer.answerNo == 1).length;
+  int getWrongAnswerCount() {
+    var questions = widget.questionList;
+    var answers = widget.answersList;
+    return answers.entries
+        .where((x) =>
+            questions
+                .where((z) => z.id == x.key)
+                .first
+                .correctAnswer
+                .answerNo !=
+            x.value + 1)
+        .length;
+  }
+
+  bool checkQuestionAnswer(QuestionModel question) {
+    var questions = widget.questionList;
+    var answers = widget.answersList;
+    return answers.entries
+        .where((x) =>
+            x.key == question.id &&
+            x.value + 1 == question.correctAnswer.answerNo)
+        .isNotEmpty;
   }
 }
