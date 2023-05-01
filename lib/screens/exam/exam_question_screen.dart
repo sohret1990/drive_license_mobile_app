@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:drive_license_app/models/question_model.dart';
 import 'package:drive_license_app/screens/exam/exam_answer_screen.dart';
 import 'package:drive_license_app/screens/exam/exam_question_number_screen.dart';
-import 'package:drive_license_app/screens/exam/exam_result_sreen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ExamQuestionScreen extends StatefulWidget {
   ExamQuestionScreen({
@@ -37,84 +35,96 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
     this.widget.changeQuestion(value);
   }
 
-  incrementMistakes(){
+  incrementMistakes() {
     this.widget.incrementMistakes();
   }
 
-  Widget get getQuestion => (this.widget.questionModel.imagePath ?? '').length >
-          0
-      ?
-      // check if imagePath exists. Here is the problem
-      Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Image.memory(
-              base64.decode(this.widget.questionModel.imagePath!),
-              width: MediaQuery.of(context).size.width,
-              height: 95,
-              fit: BoxFit.fill,
-            ),
-            Expanded(
-              //margin: EdgeInsets.only(top: 6),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+  Widget get getQuestion =>
+      (this.widget.questionModel.imagePath ?? '').length > 0
+          ?
+          // check if imagePath exists. Here is the problem
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 5, right: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      color: Colors.indigoAccent),
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: Image.memory(
+                    base64.decode(this.widget.questionModel.imagePath!),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(left: 5, right: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    color: Color.fromARGB(151, 109, 175, 243),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.10,
+                  width: MediaQuery.of(context).size.width,
                   child: Text(
                     this.widget.questionModel.nameAz,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
+              ],
+            )
+          :
+          // if not
+          Container(
+            alignment: Alignment.center,
+              margin: EdgeInsets.only(left: 5, right: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: Color.fromARGB(151, 109, 175, 243),
               ),
-            ),
-          ],
-        )
-      :
-      // if not
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Center(
-              child: Text(
-                this.widget.questionModel.nameAz,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+              height: MediaQuery.of(context).size.height * 0.20,
+              width: MediaQuery.of(context).size.width * 2,
+              child: Center(
+                child: Text(
+                  this.widget.questionModel.nameAz,
+                  style: Theme.of(context).textTheme.titleSmall,
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-          ],
-        );
+            );
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: this.widget.questionModel == null
-          ? CircularProgressIndicator()
-          : Column(
-              children: [
-                ExamQuestionNumberScreen(
-                  questionIndex: this.widget.questionIndex,
-                  questionList: this.widget.questionList,
-                  changeQuestion: this.changeQuestion,
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Card(
-                    margin: EdgeInsets.all(6),
-                    color: Colors.indigo[400],
-                    child: Center(
-                      child: getQuestion,
-                    ),
-                  ),
-                ),
-                ExamAnswer(
-                  questionModel: this.widget.questionModel,
-                  answerMap: this.widget.answerMap,
-                  questionList: this.widget.questionList,
-                  mistakesCount: this.widget.mistakesCount,
-                  incrementMistakes: this.incrementMistakes,
-                )
-              ],
-            ),
-    );
+    return widget.questionModel == null
+        ? const CircularProgressIndicator()
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ExamQuestionNumberScreen(
+                questionIndex: widget.questionIndex,
+                questionList: widget.questionList,
+                changeQuestion: this.changeQuestion,
+              ),
+              getQuestion,
+              ExamAnswer(
+                questionModel: this.widget.questionModel,
+                answerMap: this.widget.answerMap,
+                questionList: this.widget.questionList,
+                mistakesCount: this.widget.mistakesCount,
+                incrementMistakes: this.incrementMistakes,
+              )
+            ],
+          );
   }
 }

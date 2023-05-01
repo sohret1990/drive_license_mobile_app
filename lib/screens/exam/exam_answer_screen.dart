@@ -86,9 +86,10 @@ class _ExamAnswerState extends State<ExamAnswer> {
                   ),
                   width: 30,
                   height: 30,
+                  //color: Color.fromARGB(151, 109, 175, 243),
                   decoration: BoxDecoration(
                     gradient: const RadialGradient(
-                        colors: [Colors.indigoAccent, Colors.indigo]),
+                        colors: [Color.fromARGB(151, 109, 175, 243), Colors.indigo]),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(

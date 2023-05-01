@@ -34,9 +34,10 @@ class MainScreen extends StatelessWidget {
               ],
             ),
             padding: EdgeInsets.all(20),
-            height: 350,
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.values[1],
               children: [

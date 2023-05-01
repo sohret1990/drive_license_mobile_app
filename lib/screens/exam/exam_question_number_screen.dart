@@ -16,69 +16,38 @@ class ExamQuestionNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 6.0),
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: questionList.length,
-            itemBuilder: (context, index) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTapDown: (details) {
-                      this.changeQuestion(index);
-                    },
-                    child: Container(
-                      width: 30,
-                      height: 10,
-                      decoration: questionIndex != index
-                          ? BoxDecoration(
-                              gradient: const RadialGradient(
-                                  colors: [Colors.indigoAccent, Colors.indigo]),
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.indigo.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 1,
-                                  offset: const Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                            )
-                          : BoxDecoration(
-                              gradient: const RadialGradient(
-                                  colors: [Colors.orangeAccent, Colors.orange]),
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.orange.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 1,
-                                  offset: const Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                      margin: const EdgeInsets.only(left: 1, right: 1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: Text('${index + 1}',
-                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                            textAlign: TextAlign.center),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                ],
-              );
-            }),
+    var index = 0;
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 40,
+      child: Row(
+        children: getQuestionNumbers(context),
       ),
     );
+  }
+
+  List<Widget> getQuestionNumbers(BuildContext context) {
+    return questionList
+        .map((e) => GestureDetector(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width / 10,
+                height: MediaQuery.of(context).size.width / 10 * 0.95,
+                child: questionList.indexOf(e) == questionIndex
+                    ? Image(
+                        image: AssetImage(
+                            "assets/images/azpdd/button${questionList.indexOf(e) + 1}selected.jpg"),
+                      )
+                    : Image(
+                        image: AssetImage(
+                            "assets/images/azpdd/button${questionList.indexOf(e) + 1}.jpg"),
+                      ),
+              ),
+              onTap: () {
+                if (questionList.indexOf(e) != questionIndex) {
+                  this.changeQuestion(questionList.indexOf(e));
+                }
+              },
+            ))
+        .toList();
   }
 }

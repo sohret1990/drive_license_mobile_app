@@ -56,7 +56,7 @@ class _ExamScreenState extends State<ExamScreen> {
         child: MyAppBar(
           iconData: null, // Icons.checklist,
           isCenter: true,
-          caption: "Sınaq imtahanı",
+          caption: "Yol hərəkəti qaydaları",
           actionList: [
             MaterialButton(
               visualDensity: VisualDensity.comfortable,
