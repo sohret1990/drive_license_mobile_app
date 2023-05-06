@@ -1,8 +1,8 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'dart:convert';
+
 import 'package:drive_license_app/controllers/question_controller.dart';
 import 'package:drive_license_app/helpers/my_app_bar.dart';
 import 'package:drive_license_app/models/question_model.dart';
-import 'package:drive_license_app/screens/question/question_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,48 +25,70 @@ class QuestionScreen extends StatelessWidget {
         isCenter: true,
         caption: "Suallar",
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<List<QuestionModel>>(
         future: getQuestionList(),
         initialData: [],
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data is List<QuestionModel>) {
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  var question = snapshot.data![index] as QuestionModel;
-                  return QuestionItem(
-                    model: question,
-                  );
-                });
-          } else if (snapshot.hasError)
+          if (snapshot.hasData) {
+            return GridView.builder(
+              itemCount: snapshot.data?.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 5.0,
+              ),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (contex, index) =>
+                  getQuestions(snapshot.data!, index),
+            );
+          } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),
             );
-          else
-            return Center(
+          } else {
+            return const Center(
               child: CircularProgressIndicator(
-                color: Colors.teal,
+                color: Colors.indigoAccent,
               ),
             );
+          }
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){  },
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        activeIndex: 0,
-        onTap: (index){},
-        icons: [
-          Icons.list,
-          //Icons.home,
-          Icons.question_mark
-        ],
-        gapLocation: GapLocation.center,
-        activeColor: Colors.teal,
-        blurEffect: true,
-      ),
+    );
+  }
+
+  Widget getQuestions(List<QuestionModel> model, int index) {
+    var question = model[index];
+
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: Colors.indigoAccent,
+              width: 1.0,
+              style: BorderStyle.solid,
+              strokeAlign: BorderSide.strokeAlignOutside)),
+      alignment: Alignment.center,
+      child: question.imagePath.isNull
+          ? Text(
+              model[index].nameAz,
+              textAlign: TextAlign.center,
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image(
+                  image: Image.memory(
+                    base64.decode(question.imagePath!),
+                    fit: BoxFit.fill,
+                  ).image,
+                ),
+                Text(
+                  question.nameAz,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
     );
   }
 }

@@ -98,7 +98,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
                     ],
                   ),
                   onPressed: () {
-                    Get.offNamed("exam");
+                    Get.offAllNamed("exam");
                   }, ),
               SizedBox.fromSize(size: Size.fromHeight(20)),
             ],
