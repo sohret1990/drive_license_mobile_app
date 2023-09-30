@@ -1,15 +1,15 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:drive_license_app/models/question_model.dart';
+import 'package:drive_license_app/helpers/app_config.dart';
+import 'package:get/get.dart';
 
 class RequestHelper {
-  final _baseUrl = "http://api.drivelicense.azerp.org:8080/";
+  final _baseUrl = Get.find<AppConfig>().url;
 
   get dio => Dio(BaseOptions(baseUrl: _baseUrl));
 
-  Future<Response> getData(String url) async {
-    Response response = await dio.get(url);
+  Future<dynamic> getData(String url) async {
+    print(url);
+    var response = await dio.get(url);
    // print(response);
     var data =response.data;
 

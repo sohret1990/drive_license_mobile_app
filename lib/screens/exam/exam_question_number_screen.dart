@@ -28,26 +28,26 @@ class ExamQuestionNumberScreen extends StatelessWidget {
 
   List<Widget> getQuestionNumbers(BuildContext context) {
     return questionList
-        .map((e) => GestureDetector(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width / 10,
-                height: MediaQuery.of(context).size.width / 10 * 0.95,
-                child: questionList.indexOf(e) == questionIndex
-                    ? Image(
-                        image: AssetImage(
-                            "assets/images/azpdd/button${questionList.indexOf(e) + 1}selected.jpg"),
-                      )
-                    : Image(
-                        image: AssetImage(
-                            "assets/images/azpdd/button${questionList.indexOf(e) + 1}.jpg"),
-                      ),
-              ),
+        .map((e) => Expanded(
+        child: GestureDetector(
+              child: questionList.indexOf(e) == questionIndex
+                  ? Image(
+                height: 30,
+               // width: MediaQuery.of(context).size.width / 10 -20,
+                      image: AssetImage(
+                          "assets/images/azpdd/button${questionList.indexOf(e) + 1}selected.jpg"),
+               )
+                  : Image(
+                height: 30,
+                      image: AssetImage(
+                          "assets/images/azpdd/button${questionList.indexOf(e) + 1}.jpg"),
+                    ),
               onTap: () {
                 if (questionList.indexOf(e) != questionIndex) {
                   this.changeQuestion(questionList.indexOf(e));
                 }
               },
-            ))
+            )))
         .toList();
   }
 }

@@ -30,17 +30,48 @@ class QuestionScreen extends StatelessWidget {
         initialData: [],
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return GridView.builder(
-              itemCount: snapshot.data?.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 5.0,
-              ),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (contex, index) =>
-                  getQuestions(snapshot.data!, index),
-            );
+
+            return ListView.builder(itemCount: snapshot.data!.length, itemBuilder: (ctx, index){
+              var question = snapshot.data![index];
+              return Card(
+                child: ListTile(
+                  leading: question.imagePath!=null? GestureDetector(
+                    onTap: (){
+
+                      showDialog(
+                          context: context,
+                          builder: (ctx){
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.pop(ctx);
+                          },
+                          child: SizedBox(
+                            height: MediaQuery.of(ctx).size.height * 0.60,
+                            child: Image(
+                              width: MediaQuery.of(ctx).size.width * 0.95,
+                              image: Image.memory(
+                                base64.decode(question.imagePath!),
+                                fit: BoxFit.cover,
+                              ).image,
+                            ),
+                          ),
+                        );
+                      });
+                    },
+                    child: Image(
+                      width: 100,
+                      image: Image.memory(
+                        base64.decode(question.imagePath!),
+                        fit: BoxFit.cover,
+                      ).image,
+                    ),
+                  ):null,
+                  title: Text(question.nameAz),
+                  subtitle: Text(question.questionAnswer[question.correctAnswer.answerNo-1].answer.nameAz),
+                ),
+              );
+            });
+
           } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),
@@ -54,41 +85,6 @@ class QuestionScreen extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-
-  Widget getQuestions(List<QuestionModel> model, int index) {
-    var question = model[index];
-
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.indigoAccent,
-              width: 1.0,
-              style: BorderStyle.solid,
-              strokeAlign: BorderSide.strokeAlignOutside)),
-      alignment: Alignment.center,
-      child: question.imagePath.isNull
-          ? Text(
-              model[index].nameAz,
-              textAlign: TextAlign.center,
-            )
-          : Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image(
-                  image: Image.memory(
-                    base64.decode(question.imagePath!),
-                    fit: BoxFit.fill,
-                  ).image,
-                ),
-                Text(
-                  question.nameAz,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
     );
   }
 }

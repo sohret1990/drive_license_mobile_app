@@ -91,7 +91,7 @@ class _ExamQuestionScreenState extends State<ExamQuestionScreen> {
                 borderRadius: BorderRadius.circular(6),
                 color: Color.fromARGB(151, 109, 175, 243),
               ),
-              height: MediaQuery.of(context).size.height * 0.20,
+              height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width * 2,
               child: Center(
                 child: Text(

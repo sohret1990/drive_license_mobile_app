@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:drive_license_app/bindings/exam_binding.dart';
 import 'package:drive_license_app/bindings/subject_binding.dart';
+import 'package:drive_license_app/helpers/app_config.dart';
 import 'package:drive_license_app/screens/exam/exam_screen.dart';
 import 'package:drive_license_app/screens/rule/rule_screen.dart';
 import 'package:drive_license_app/screens/subject/subject_screent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'bindings/question_binding.dart';
@@ -12,7 +16,13 @@ import 'screens/main_screen.dart';
 import 'screens/question/question_screen.dart';
 import 'themes/material_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+   var data = jsonDecode( await rootBundle.loadString("assets/configuration/dev.json"));
+
+   var conf = AppConfig.fromJson(data);
+
+   Get.put(conf);
   runApp(const DriveLicenseApp());
 }
 
